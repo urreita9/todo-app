@@ -1,0 +1,27 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+ 
+    .backGround__image{
+        width: 100vw;
+        height: 25vh;
+       background-size: cover;
+        background-repeat: no-repeat;
+       
+
+    }
+    
+    .backGround__empty{
+        width: 100vw;
+        height: 75vh;
+        background-color: $veryLightGray;
+    }
+ 
+}
+
+    .dark{
+        .backGround__empty{
+            background-color: $veryDarkBlue;
+        }
+    }
+
