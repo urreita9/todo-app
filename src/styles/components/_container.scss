@@ -1,10 +1,10 @@
 .container{
     width: 100vw;
     height: 100vh;
- 
+    overflow-y: hidden;
     .backGround__image{
         width: 100vw;
-        height: 25vh;
+        height: 30vh;
        background-size: cover;
         background-repeat: no-repeat;
        

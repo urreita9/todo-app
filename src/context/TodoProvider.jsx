@@ -1,4 +1,4 @@
-import {useState, useContext, createContext} from 'react'
+import {useState, useContext, createContext, useEffect} from 'react'
 
 
 const todoContext = createContext()
@@ -11,7 +11,10 @@ export const TodoProvider = ({children}) => {
     const [input, setInput] = useState('')
     const [todos, setTodos] = useState([])
     
-    console.log(todos)
+    useEffect(()=>{
+        console.log(todos)
+    }, [todos])
+   
     const handleMode = ()=>{
         setDark(!dark)
     }
@@ -26,13 +29,37 @@ export const TodoProvider = ({children}) => {
         }
         setTodos([...todos, newTodo])
         setInput('')
+    };
+    const deleteTodo= (id)=>{
+        const removeTodo = todos.filter(todo=>todo.id!==id)
+        
+        setTodos(removeTodo)
+    };
+    const completeTodo=(id)=>{
+        const completed= todos.map((todo)=>{
+            if(todo.id===id){
+                return {...todo, done: !todo.done};
+            } else{
+                return todo;
+            }
+        })
+       
+        setTodos(completed);
+    }
+    const clearCompleted = ()=>{
+        const clear = todos.filter(todo=>todo.done===false);
+        setTodos(clear)
     }
     const values={
         dark,
         handleMode,
         input,
         setInput,
-        addTodo
+        addTodo,
+        todos,
+        deleteTodo,
+        completeTodo,
+        clearCompleted
 
     }
     return (

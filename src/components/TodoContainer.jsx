@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { Input } from './Input'
 import { TitleModeToggle } from './TitleModeToggle'
+import { TodoList } from './TodoList'
 
 export const TodoContainer = () => {
    
@@ -8,6 +9,7 @@ export const TodoContainer = () => {
         <div className='todo__container'>
             <TitleModeToggle/>
             <Input/>
+            <TodoList/>
         </div>
     )
 }

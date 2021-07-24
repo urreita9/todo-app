@@ -1,0 +1,40 @@
+.todoList__container {
+    list-style: none;
+    width: 100%;
+    background-color: white;
+    margin-top: 25px;
+    border-radius: 5px;
+    .border{
+        border-bottom: 1px solid $darkGrayishBlue;
+    }
+    .todoList__item{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 40px;
+        margin: 20px 0 20px 0;
+        
+            .completed{
+                text-decoration: line-through;
+            }
+        
+        .cross{
+            
+            margin-right: 15px;
+        }
+        .checkbox{
+            width: 20px;
+            height: 20px;
+            border: 1px solid $lightGrayishBlueHover;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+    }
+}
+.dark{
+    .todoList__container{
+        background-color: $veryDarkDesaturateBlue;
+        color: $darkGrayishBlue;
+    }
+}
