@@ -2,20 +2,22 @@ import React from 'react'
 import { useTodo } from '../context/TodoProvider'
 
 export const TodoList = () => {
-    const {todos, deleteTodo, completeTodo, clearCompleted} =useTodo()
+    const {todos, filteredTodos, deleteTodo, completeTodo, clearCompleted} =useTodo()
 
-    const itemsLeft = todos.filter(todo=>todo.done===false);
+    const itemsLeft = filteredTodos.filter(todo=>todo.done===false);
     return (
         <ul className='todoList__container'>
-            {todos.map(({desc, id, done},index)=> (
+            {filteredTodos.map(({desc, id, done},index)=> (
                 <li key={index} className='todoList__item border'>
-                    <div>
-                    <i className='checkbox'>
+                    <div className='todo__list__left' onClick={()=>completeTodo(id)}>
+                    <i className={`checkbox ${done?'done':''}`} >
+                        {done &&   
                         <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
                             <path fill="none" stroke="#FFF" strokeWidth="2" d="M1 4.304L3.696 7l6-6"/>
-                        </svg>
+                        </svg>}
+                      
                     </i>
-                    <span className={`todoList__item__text ${done?'completed': ''}`} onClick={()=>completeTodo(id)}>{desc}</span>
+                    <span className={`todoList__item__text ${done?'completed': ''}`} >{desc}</span>
                     </div>
                     <i className='cross' onClick={()=>deleteTodo(id)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
@@ -24,17 +26,19 @@ export const TodoList = () => {
                     </i>
                 </li>
             ))}
+            {todos.length>0 &&  
+            
             <li className='todoList__item'>
-                <div>
-                    <span>
+              
+                    <span className='itemsLeft'>
                         {`${itemsLeft.length} items left`} 
                          
                     </span>
-                </div>
-                <div>
-                    <span onClick={clearCompleted}>Clear Completed</span>
-                </div>
-            </li>
+               
+                    <span  className='clearCompleted' onClick={clearCompleted}>Clear Completed</span>
+              
+            </li>}
+           
         </ul>
     )
 }
