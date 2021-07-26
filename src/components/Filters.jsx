@@ -1,29 +1,23 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { useTodo } from '../context/TodoProvider'
-const initialFocus = {
-    all: true,
-    active: false,
-    completed: false
-}
+
 export const Filters = ({display}) => {
-    const [focus, setFocus] = useState(initialFocus)
-    const {filterTodos} = useTodo()
+    
+    const { focus, setFocus} = useTodo()
 
     return (
         <div className={display}>
             <button className={`${focus.all?'focus': ''}`} onClick={()=>{
-                setFocus(initialFocus);
-                filterTodos('all');}}>All</button>
+                setFocus({all: true, active: false, completed: false});}}
+                >All</button>
             <button className={`${focus.active?'focus': ''}`} 
                 onClick={()=>{
-                    setFocus({all: false, active: true, completed: false})
-                    filterTodos('active')}}>
+                    setFocus({all: false, active: true, completed: false})}}>
                 Active
             </button>
             <button className={`${focus.completed?'focus': ''}`} 
                 onClick={()=>{
-                    setFocus({all:false,active: false, completed: true})
-                    filterTodos('completed')}}>
+                    setFocus({all:false,active: false, completed: true})}}>
                 
                 Completed
             </button>

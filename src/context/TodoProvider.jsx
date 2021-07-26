@@ -1,4 +1,4 @@
-import {useState, useContext, createContext, useEffect} from 'react'
+import {useState, useContext, createContext, useEffect} from 'react';
 
 
 const todoContext = createContext()
@@ -10,6 +10,11 @@ export function useTodo(){
 const init = () => {
 	return JSON.parse(localStorage.getItem("todos")) || [];
 };
+const initialFocus = {
+    all: true,
+    active: false,
+    completed: false
+}
 
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
@@ -24,21 +29,20 @@ export const TodoProvider = ({children}) => {
     const [dark, setDark] = useState(false)
     const [input, setInput] = useState('')
     const [todos, setTodos] = useState(init)
-    const [filteredTodos, setFilteredTodos] = useState([...todos])
+    const [focus, setFocus] = useState(initialFocus)
     const [error, setError] = useState('')
 
     useEffect(() => {
         function handleResize() {
           setWindowDimensions(getWindowDimensions());
-        }
-    
+        };
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
       }, []);
     
     useEffect(()=>{
         localStorage.setItem("todos", JSON.stringify(todos));
-        setFilteredTodos(todos)
+        
     }, [todos])
 
    
@@ -81,16 +85,11 @@ export const TodoProvider = ({children}) => {
         setTodos(clear)
     }
 
-    const filterTodos = (type)=>{
-        switch(type){
-            case 'all': return setFilteredTodos(todos);
-            case 'active': return setFilteredTodos(todos.filter(todo=>todo.done===false));
-            case 'completed': return setFilteredTodos(todos.filter(todo=>todo.done===true));
-            default:
-                return filterTodos;
-        }
+    const filterTodos =()=>{
+        if(focus.completed)return (todos.filter(todo=>todo.done===true));
+        else if(focus.active)return (todos.filter(todo=>todo.done===false));
+        else return (todos)
     }
-    
     const reOrder = (list, startIndex, endIndex)=>{
         const result = [...list];
         const [removed] = result.splice(startIndex, 1);
@@ -112,12 +111,10 @@ export const TodoProvider = ({children}) => {
         completeTodo,
         clearCompleted,
         filterTodos,
-        filteredTodos,
-        setFilteredTodos,
         error,
-        reOrder
-
-
+        reOrder,
+        focus,
+        setFocus
     }
     return (
         <todoContext.Provider value={values}>

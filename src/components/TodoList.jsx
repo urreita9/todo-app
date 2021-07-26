@@ -1,12 +1,19 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { useTodo } from '../context/TodoProvider'
 import { Filters } from './Filters'
 
 export const TodoList = () => {
-    const {todos, filteredTodos, deleteTodo, completeTodo, clearCompleted, reOrder, setTodos, windowDimensions} =useTodo()
+    const {todos, deleteTodo, completeTodo, clearCompleted, reOrder, setTodos, windowDimensions, focus, filterTodos} =useTodo()
     const {width} = windowDimensions;
-    const itemsLeft = filteredTodos.filter(todo=>todo.done===false);
+    
+    useEffect(()=>{
+        filterTodos()
+    }, [focus])
+
+    const itemsLeft = todos.filter(todo=>todo.done===false);
+
+
     return (
         <DragDropContext onDragEnd={(result)=>{
             const {source, destination} = result;
@@ -28,7 +35,7 @@ export const TodoList = () => {
                     {...droppableProvided.droppableProps} 
                     ref={droppableProvided.innerRef}
                     className='todoList__container'>
-                    {filteredTodos.map(({desc, id, done},index)=> (
+                    {filterTodos().map(({desc, id, done},index)=> (
                         <Draggable key={id} draggableId={`${id}`} index={index}>
                            {(draggableProvided)=>( 
                             <li {...draggableProvided.draggableProps}  
