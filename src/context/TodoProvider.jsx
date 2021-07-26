@@ -107,6 +107,7 @@ export const TodoProvider = ({children}) => {
         setInput,
         addTodo,
         todos,
+        setTodos,
         deleteTodo,
         completeTodo,
         clearCompleted,

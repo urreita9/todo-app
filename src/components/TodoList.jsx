@@ -4,7 +4,7 @@ import { useTodo } from '../context/TodoProvider'
 import { Filters } from './Filters'
 
 export const TodoList = () => {
-    const {todos, filteredTodos, deleteTodo, completeTodo, clearCompleted, reOrder, setFilteredTodos, windowDimensions} =useTodo()
+    const {todos, filteredTodos, deleteTodo, completeTodo, clearCompleted, reOrder, setTodos, windowDimensions} =useTodo()
     const {width} = windowDimensions;
     const itemsLeft = filteredTodos.filter(todo=>todo.done===false);
     return (
@@ -18,7 +18,7 @@ export const TodoList = () => {
                 return;
             }
 
-            setFilteredTodos(prev=> reOrder(prev,source.index,destination.index ))
+            setTodos(prev=> reOrder(prev,source.index,destination.index ))
 
 
         }}>
