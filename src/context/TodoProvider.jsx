@@ -2,23 +2,45 @@ import {useState, useContext, createContext, useEffect} from 'react'
 
 
 const todoContext = createContext()
+
 export function useTodo(){
     return useContext(todoContext)
 }
+
 const init = () => {
 	return JSON.parse(localStorage.getItem("todos")) || [];
 };
+
+function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height
+    };
+  };
+
 export const TodoProvider = ({children}) => {
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
     const [dark, setDark] = useState(false)
     const [input, setInput] = useState('')
     const [todos, setTodos] = useState(init)
     const [filteredTodos, setFilteredTodos] = useState([...todos])
     const [error, setError] = useState('')
+
+    useEffect(() => {
+        function handleResize() {
+          setWindowDimensions(getWindowDimensions());
+        }
+    
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+      }, []);
     
     useEffect(()=>{
         localStorage.setItem("todos", JSON.stringify(todos));
         setFilteredTodos(todos)
     }, [todos])
+
    
     const handleMode = ()=>{
         setDark(!dark)
@@ -69,8 +91,16 @@ export const TodoProvider = ({children}) => {
         }
     }
     
+    const reOrder = (list, startIndex, endIndex)=>{
+        const result = [...list];
+        const [removed] = result.splice(startIndex, 1);
+        result.splice(endIndex, 0, removed);
+
+        return result;
+    }
 
     const values={
+        windowDimensions,
         dark,
         handleMode,
         input,
@@ -82,7 +112,9 @@ export const TodoProvider = ({children}) => {
         clearCompleted,
         filterTodos,
         filteredTodos,
-        error
+        setFilteredTodos,
+        error,
+        reOrder
 
 
     }

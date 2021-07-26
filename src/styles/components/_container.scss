@@ -1,12 +1,18 @@
 .container{
     width: 100%;
     height: 100%;
+    background-color: $veryLightGray;
     // overflow-y: hidden;
 
     .backGround__image{
         width: 100vw;
-        height: 30vh;
-       background-size: cover;
+        height: 30%;
+        top: 0;
+        z-index: 1;
+        left: 0;
+        background: transparent;
+        position: absolute;
+        background-size: cover;
         background-repeat: no-repeat;
        
 
@@ -14,13 +20,14 @@
     
     .backGround__empty{
         width: 100vw;
-        height: 75vh;
+        height: max-content;
         background-color: $veryLightGray;
     }
  
 }
 
     .dark{
+        background-color: $veryDarkBlue;
         .backGround__empty{
             background-color: $veryDarkBlue;
         }

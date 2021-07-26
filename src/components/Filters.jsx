@@ -5,12 +5,12 @@ const initialFocus = {
     active: false,
     completed: false
 }
-export const Filters = () => {
+export const Filters = ({display}) => {
     const [focus, setFocus] = useState(initialFocus)
     const {filterTodos} = useTodo()
 
     return (
-        <div className='input__container'>
+        <div className={display}>
             <button className={`${focus.all?'focus': ''}`} onClick={()=>{
                 setFocus(initialFocus);
                 filterTodos('all');}}>All</button>

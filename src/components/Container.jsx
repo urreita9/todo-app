@@ -2,16 +2,30 @@ import React from 'react'
 import { useTodo } from '../context/TodoProvider'
 import { TodoContainer } from './TodoContainer'
 
+
+
+  
+
 export const Container = () => {
-    const{dark}=useTodo()
+
+    const{dark, windowDimensions}=useTodo()
+ 
+    const {width} = windowDimensions;
+    console.log(width)
+
+
     return (
         <div className={`container ${dark?'dark':''}`}>
-            <div className='backGround__image' style={{backgroundImage: dark?'url(/images/bg-mobile-dark.jpg)': 'url(/images/bg-mobile-light.jpg)'}}>
+            <div className='backGround__image' 
+            style={width<376
+                ?{backgroundImage: dark?'url(/images/bg-mobile-dark.jpg)': 'url(/images/bg-mobile-light.jpg)'}
+                :{backgroundImage: dark?'url(/images/bg-desktop-dark.jpg)': 'url(/images/bg-desktop-light.jpg)'}
+                }>
 
             </div>
-            <TodoContainer />
+            
             <div className='backGround__empty'>
-
+                <TodoContainer />
             </div>
         </div>
     )

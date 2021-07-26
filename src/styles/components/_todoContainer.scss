@@ -1,12 +1,10 @@
 .todo__container {
-    position: absolute;
+    position: relative;
     z-index: 1;
     width: 80%;
     max-width: 80vw;
-    max-height: 75vh;
-    top: 5%;
-    left: 10%;
-    margin: auto;
+   
+    margin: 13% auto;
     .todo__title{
         display: flex;
         justify-content: space-between;

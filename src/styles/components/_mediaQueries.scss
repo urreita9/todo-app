@@ -1,0 +1,92 @@
+@media (min-width:376px){
+    .container{
+         .backGround__image{
+            background-size:cover;
+            background-repeat: no-repeat;
+        }
+    }
+   
+    .todo__container{
+        margin: 50px auto;
+        max-width: 700px;
+        
+        .todo__title{
+            .todo__title__title{
+                letter-spacing: 10px;
+                font-size: 2rem;
+            }
+            .todo__title__icon{
+                font-size: 2rem;
+            }
+        }
+
+    }
+    .input__container, .todoList__item{
+        .checkbox{
+        
+            &:hover{
+                border-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+                
+                border-image-slice: 1;
+            }
+        }
+    }
+    .todoList__item{
+        .input__container__desktop{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 20%;
+        
+        button{
+            background-color: transparent;
+            border: none;
+            cursor:pointer;
+            color: $darkGrayishBlue;
+            margin: 0 10px;
+            &:hover{
+                color: $veryDarkGrayishBlue;
+            }
+        }
+        .focus{
+            color: $brightBlue;
+        }
+        
+    }
+    .cross{
+        display: none;
+    }
+    .clearCompleted{
+        &:hover{
+            color: $veryDarkGrayishBlue;
+        }
+    }
+    &:hover{
+        .cross{
+            display: flex;
+        }
+    }
+    }
+    
+    .dark{
+        .todoList__container .todoList__item{
+            color: $lightGrayishBlue;
+        }
+        .todoList__container .todoList__item .completed {
+            text-decoration: line-through;
+            color: $darkGrayishBlue;
+        }
+        .todoList__item{
+            button{
+                &:hover{
+                    color: $lightGrayishBlue;
+                }
+            }
+            .clearCompleted{
+                &:hover{
+                    color: $lightGrayishBlue;
+                }
+            }
+        }
+    }
+}

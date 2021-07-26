@@ -25,9 +25,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        &:hover{
-            background:  linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
-        }
+        // &:hover{
+        //     background:  linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+        // }
     }
     button{
         border: none;
@@ -44,7 +44,7 @@
 .dark{
     .input__container, .input{
         background-color: $veryDarkDesaturateBlue;
-        color: $darkGrayishBlue;
+        color: $lightGrayishBlue;
     }
     .input__container{
         button{
@@ -53,5 +53,12 @@
         .focus{
             color: $brightBlue;
         }
+    }
+    .todoList__container .todoList__item{
+        color: $lightGrayishBlue;
+    }
+    .todoList__container .todoList__item .completed {
+        text-decoration: line-through;
+        color: $darkGrayishBlue;
     }
 }
