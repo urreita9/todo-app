@@ -25,9 +25,12 @@
         .checkbox{
         
             &:hover{
-                border-image: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
                 
-                border-image-slice: 1;
+                border:1px solid transparent; 
+                background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%)) border-box; 
+                mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+                -webkit-mask-composite: destination-out; 
+                mask-composite: exclude; 
             }
         }
     }
