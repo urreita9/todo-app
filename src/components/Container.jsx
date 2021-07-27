@@ -27,6 +27,23 @@ export const Container = () => {
             <div className='backGround__empty'>
                 <TodoContainer />
             </div>
+            <footer className='footer'>
+				<a href='https://github.com/urreita9/todo-app.git/'>GitHub</a>
+
+				<ul>
+					<li>👇Other projects👇</li>
+					<li>
+						<a href='https://patmahomes-store-coderhouse.web.app/'>
+							PatMahomes Clone Store (React)
+						</a>
+					</li>
+					<li>
+						<a href='https://urreita9.github.io/giphos/'>
+							Giphos (Vanilla JS-spanish)
+						</a>
+					</li>
+				</ul>
+			</footer>
         </div>
     )
 }

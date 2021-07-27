@@ -4,6 +4,25 @@
             background-size:cover;
             background-repeat: no-repeat;
         }
+        .footer{
+            font-size: 0.5rem;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+            a{
+                text-decoration: none;
+            } 
+            ul{
+                list-style: none;
+               
+                li a{
+                    text-decoration: none;
+                }
+            }
+        }
     }
    
     .todo__container{
@@ -69,6 +88,7 @@
             display: flex;
         }
     }
+   
     }
     
     .dark{
