@@ -11,7 +11,7 @@ export const Container = () => {
     const{dark, windowDimensions}=useTodo()
  
     const {width} = windowDimensions;
-    console.log(width)
+ 
 
 
     return (

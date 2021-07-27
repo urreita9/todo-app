@@ -4,15 +4,16 @@ import { useTodo } from '../context/TodoProvider'
 import { Filters } from './Filters'
 
 export const TodoList = () => {
-    const {todos, deleteTodo, completeTodo, clearCompleted, reOrder, setTodos, windowDimensions, focus, filterTodos} =useTodo()
+    const {todos, deleteTodo, completeTodo, clearCompleted, reOrder, setTodos, windowDimensions, giveClassFiltered} =useTodo()
     const {width} = windowDimensions;
     
     useEffect(()=>{
-        filterTodos()
-    }, [focus])
+        console.log(todos)
+    }, [todos])
 
     const itemsLeft = todos.filter(todo=>todo.done===false);
 
+   
 
     return (
         <DragDropContext onDragEnd={(result)=>{
@@ -24,9 +25,9 @@ export const TodoList = () => {
              (source.droppableId===destination.droppableId)){
                 return;
             }
-
+            
             setTodos(prev=> reOrder(prev,source.index,destination.index ))
-
+            
 
         }}>
             <Droppable droppableId='todos'>
@@ -35,22 +36,22 @@ export const TodoList = () => {
                     {...droppableProvided.droppableProps} 
                     ref={droppableProvided.innerRef}
                     className='todoList__container'>
-                    {filterTodos().map(({desc, id, done},index)=> (
+                    {todos.map(({desc, id, done},index)=> (
                         <Draggable key={id} draggableId={`${id}`} index={index}>
                            {(draggableProvided)=>( 
                             <li {...draggableProvided.draggableProps}  
                                 ref={draggableProvided.innerRef}
                                 {...draggableProvided.dragHandleProps}
-                                className='todoList__item border'>
+                                className={`todoList__item border ${giveClassFiltered(done) }`}>
                                     <div className='todo__list__left' onClick={()=>completeTodo(id)}>
-                                    <i className={`checkbox ${done?'done':''}`} >
-                                        {done &&   
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
-                                            <path fill="none" stroke="#FFF" strokeWidth="2" d="M1 4.304L3.696 7l6-6"/>
-                                        </svg>}
-                                    
-                                    </i>
-                                    <span className={`todoList__item__text ${done?'completed': ''}`} >{desc}</span>
+                                        <i className={`checkbox ${done?'done':''}`} >
+                                            {done &&   
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
+                                                <path fill="none" stroke="#FFF" strokeWidth="2" d="M1 4.304L3.696 7l6-6"/>
+                                            </svg>}
+                                        
+                                        </i>
+                                        <span className={`todoList__item__text ${done?'completed': ''}`} >{desc}</span>
                                     </div>
                                     <i className='cross' onClick={()=>deleteTodo(id)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">

@@ -42,7 +42,6 @@ export const TodoProvider = ({children}) => {
     
     useEffect(()=>{
         localStorage.setItem("todos", JSON.stringify(todos));
-        
     }, [todos])
 
    
@@ -85,11 +84,7 @@ export const TodoProvider = ({children}) => {
         setTodos(clear)
     }
 
-    const filterTodos =()=>{
-        if(focus.completed)return (todos.filter(todo=>todo.done===true));
-        else if(focus.active)return (todos.filter(todo=>todo.done===false));
-        else return (todos)
-    }
+  
     const reOrder = (list, startIndex, endIndex)=>{
         const result = [...list];
         const [removed] = result.splice(startIndex, 1);
@@ -97,6 +92,18 @@ export const TodoProvider = ({children}) => {
 
         return result;
     }
+    const giveClassFiltered = (done)=>{
+        if(focus.completed){
+            if(!done)return 'hide'
+            else return
+        } else if(focus.active){
+            if(done) return 'hide'
+            else return 
+        } else{
+            return
+        }
+    }
+   
 
     const values={
         windowDimensions,
@@ -110,11 +117,11 @@ export const TodoProvider = ({children}) => {
         deleteTodo,
         completeTodo,
         clearCompleted,
-        filterTodos,
         error,
         reOrder,
         focus,
-        setFocus
+        setFocus,
+        giveClassFiltered
     }
     return (
         <todoContext.Provider value={values}>
