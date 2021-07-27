@@ -5,7 +5,7 @@ export const Input = () => {
     const {input, setInput, addTodo, error}=useTodo()
     return (
         <div className='input__container'>
-            <i className={`checkbox ${input.length > 0?'done':''}`} onClick={addTodo}>
+            <i className='checkbox' onClick={addTodo}>
                 {input.length>0 && <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
                     <path fill="none" stroke="#FFF" strokeWidth="2" d="M1 4.304L3.696 7l6-6"/>
                 </svg>}
